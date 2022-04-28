@@ -15,8 +15,8 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('Title');
-            $table->string('Description');
+            $table->string('title');
+            $table->string('description');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')
@@ -25,11 +25,11 @@ class CreateProjectsTable extends Migration
             ->constrained('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('Case');
-            $table->string('Default_Route_3D');
-            $table->string('Index_Route_3D');
-            $table->string('Category');
-            $table->string('Geometry name');
+            $table->string('case');
+            $table->string('default_Route_3D');
+            $table->string('index_Route_3D');
+            $table->string('category');
+            $table->string('geometry name');
             $table->timestamps();
         });
     }

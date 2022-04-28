@@ -15,8 +15,8 @@ class CreateSimulationsTable extends Migration
     {
         Schema::create('simulations', function (Blueprint $table) {
             $table->id();
-            $table->string('Title');
-            $table->string('Description');
+            $table->string('title');
+            $table->string('description');
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')
             ->references('id')
@@ -25,9 +25,9 @@ class CreateSimulationsTable extends Migration
             ->constrained('projects')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('Num_case');
-            $table->string('Project_status');
-            $table->string('Is_finished');
+            $table->string('num_case');
+            $table->string('project_status');
+            $table->string('is_finished');
             $table->timestamps();
         });
     }

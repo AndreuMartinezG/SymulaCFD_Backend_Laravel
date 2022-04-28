@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastname',
         'email',
         'password',
     ];
@@ -53,5 +55,13 @@ class User extends Authenticatable
         return [];
     }
 
+    public function role_users()
+    {
+        return $this->hasMany(Role_User::class);
+    }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

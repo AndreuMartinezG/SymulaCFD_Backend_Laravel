@@ -8,4 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    protected $table = 'projects';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'user_id',
+        'case',
+        'default_Route_3D',
+        'index_Route_3D',
+        'category',
+        'geometry name'
+
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function simulations()
+    {
+        return $this->hasMany(Simulation::class);
+    }
 }

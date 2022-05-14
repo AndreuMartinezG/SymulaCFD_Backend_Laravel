@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -11,20 +12,18 @@ class ProjectController extends Controller
     ///////////////// STORE PROJECT ///////////////////////
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'required|string|max:255',
-        //     'user_id' => 'required|integer',
-        //     'case' => 'required|string|max:255',
-        //     'default_Route_3D' => 'required|string|max:255',
-        //     'index_Route_3D' => 'required|string|max:255',
-        //     'category' => 'required|string|max:255',
-        //     'geometry_name' => 'required|string|max:255',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'user_id' => 'required|integer',
+            'case' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'geometry_name' => 'required|string|max:255',
+        ]);
 
-        // if($validator->fails()){
-        //     return response()->json($validator->errors()->toJson(),400);
-        // }
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(),400);
+        }
 
         $project = Project::create([
             'title' => $request->get('title'),

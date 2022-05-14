@@ -71,6 +71,8 @@ class ProjectController extends Controller
             'description' => 'required|string|max:255',
             'user_id' => 'required|integer',
             'case' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'geometry_name' => 'required|string|max:255',
         ]);
 
         if($validator->fails()){
@@ -78,10 +80,12 @@ class ProjectController extends Controller
         }
 
         $project = Project::find($id);
-        $project->name = $request->get('name');
+        $project->title = $request->get('title');
         $project->description = $request->get('description');
         $project->user_id = $request->get('user_id');
         $project->case = $request->get('case');
+        $project->category = $request->get('category');
+        $project->geometry_name = $request->get('geometry_name');
         $project->save();
 
         return response()->json(compact('project'),200);

@@ -92,6 +92,33 @@ class ProjectController extends Controller
     }
 
 
+    ///////////////// DELETE PROJECT ///////////////////////
+    public function destroy($id)
+    {
+        $project = Project::find($id);
+        $project->delete();
 
+        return response()->json(compact('project'),200);
+    }
+
+    ///////////////// UPDATE ROUTE_3D PROJECT ///////////////////////
+    public function updateRoute3D(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'default_Route_3D' => 'required|string|max:255',
+            'index_Route_3D' => 'required|string|max:255',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(),400);
+        }
+
+        $project = Project::find($id);
+        $project->default_Route_3D = $request->get('default_Route_3D');
+        $project->index_Route_3D = $request->get('index_Route_3D');
+        $project->save();
+
+        return response()->json(compact('project'),200);
+    }
 
 }

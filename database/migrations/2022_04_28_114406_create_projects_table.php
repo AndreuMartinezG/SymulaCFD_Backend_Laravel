@@ -26,10 +26,10 @@ class CreateProjectsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('case');
-            $table->string('default_Route_3D');
-            $table->string('index_Route_3D');
+            $table->string('default_Route_3D')->nullable();
+            $table->string('index_Route_3D')->nullable();
             $table->string('category');
-            $table->string('geometry name');
+            $table->string('geometry_name');
             $table->timestamps();
         });
     }

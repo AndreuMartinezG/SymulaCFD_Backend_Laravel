@@ -19,7 +19,7 @@ class Project extends Model
         'default_Route_3D',
         'index_Route_3D',
         'category',
-        'geometry name'
+        'geometry_name'
 
     ];
 

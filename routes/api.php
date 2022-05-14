@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SimulationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +34,14 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
+});
+
+
+
+// ENPOINTS de Project
+
+Route::group([
+    'middleware' => 'jwt.auth'
+], function () {
+    Route::post('/projects', [ProjectController::class, 'store']);
 });

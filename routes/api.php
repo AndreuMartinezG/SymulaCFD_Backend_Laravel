@@ -44,4 +44,12 @@ Route::group([
     'middleware' => 'jwt.auth'
 ], function () {
     Route::post('/projects', [ProjectController::class, 'store']);
+    Route::get('/projects', [ProjectController::class, 'index']);
+
+    Route::get('/projects/user/{user_id}', [ProjectController::class, 'indexByUser']);
+    Route::get('/projects/{id}', [ProjectController::class, 'show']);
+    Route::put('/projects/{id}', [ProjectController::class, 'update']);
+    Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+    // Endpoint for update route_3D
+    Route::put('/projects/{id}/route_3D', [ProjectController::class, 'updateRoute3D']);
 });

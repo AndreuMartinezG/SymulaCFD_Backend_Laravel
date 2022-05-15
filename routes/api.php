@@ -23,6 +23,7 @@ use App\Http\Controllers\SimulationController;
 
 
 
+
 // CRUD AUTH y USERS
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

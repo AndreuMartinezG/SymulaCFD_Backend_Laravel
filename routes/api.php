@@ -34,7 +34,7 @@ Route::group([
     
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
-
+    Route::put('/user/{id}', [AuthController::class, 'update']);
 });
 
 
@@ -51,6 +51,5 @@ Route::group([
     Route::get('/projects/{id}', [ProjectController::class, 'show']);
     Route::put('/projects/{id}', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
-    // Endpoint for update route_3D
     Route::put('/projects/{id}/route_3D', [ProjectController::class, 'updateRoute3D']);
 });

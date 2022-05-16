@@ -114,7 +114,7 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'User logged out successfully'
             ]);
-            
+
         } catch (\Exception $exception) {
 
             Log::error($e->getMessage());
@@ -125,4 +125,36 @@ class AuthController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    //Controlador para modificacion de los datos del usuario
+    public function update(Request $request, $id)
+    {
+        try {
+
+            // validator
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:email',
+            ]);
+
+            $user = User::find($id);
+
+            $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->email = $request->email;
+
+            $user->save();
+
+            return response()->json(compact('user'),200);
+
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            return response()->json(['error' => 'Error al actualizar el usuario'], 500);
+
+        }
+    }
+    
 }

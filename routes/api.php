@@ -52,5 +52,6 @@ Route::group([
     Route::put('/projects/{id}', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
     Route::put('/projects/{id}/route_3D', [ProjectController::class, 'updateRoute3D']);
+
     
 });

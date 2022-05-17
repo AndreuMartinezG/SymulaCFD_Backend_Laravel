@@ -72,8 +72,11 @@ class ProjectController extends Controller
     {
 
         try {
+
+            //Comprobacion de usuarioID
+            $userID = auth()->user()->id;
                     
-            $projects = Project::where('user_id', $user_id)->get();
+            $projects = Project::where('user_id', $user_id)->where('user_id',$user_id)->get();
         
             return response()->json(compact('projects'),200);
         
@@ -89,8 +92,10 @@ class ProjectController extends Controller
     public function show($id)
     {
         try {
+            //Comprobacion de usuarioID
+            $userID = auth()->user()->id;
                         
-            $project = Project::find($id);
+            $project = Project::find($id)->where('user_id',$userID);
             
             return response()->json(compact('project'),200);
             
@@ -120,8 +125,11 @@ class ProjectController extends Controller
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(),400);
             }
+
+            //Comprobacion de usuarioID
+            $user_id = auth()->user()->id;
         
-            $project = Project::find($id);
+            $project = Project::find($id)->where('user_id',$userID);;
             $project->title = $request->get('title');
             $project->description = $request->get('description');
             $project->user_id = $request->get('user_id');
@@ -145,8 +153,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         try {
-                
-            $project = Project::find($id);
+            
+            //Comprobacion de usuarioID
+            $user_id = auth()->user()->id;
+
+            $project = Project::find($id)->where('user_id',$userID);
             $project->delete();
                 
             return response()->json(['success' => 'Proyecto eliminado'],200);
@@ -174,7 +185,10 @@ class ProjectController extends Controller
                 return response()->json($validator->errors()->toJson(),400);
             }
 
-            $project = Project::find($id);
+            //Comprobacion de usuarioID
+            $user_id = auth()->user()->id;
+
+            $project = Project::find($id)->where('user_id',$userID);
             $project->default_Route_3D = $request->get('default_Route_3D');
             $project->index_Route_3D = $request->get('index_Route_3D');
             $project->save();

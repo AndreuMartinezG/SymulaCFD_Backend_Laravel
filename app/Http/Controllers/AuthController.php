@@ -37,13 +37,18 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password),
             ]);
 
+            //AÑADIR A LA TABLA ROLE_USERS EL USUARIO CREADO Y ASIGNARLE UN ROL DE LA TABLA ROLE
+            // $user->roles()->attach(1);
+
             $token = JWTAuth::fromUser($user);
 
             return response()->json(compact('user','token'),201);
 
         } catch (\Exception $e) {
+
             Log::error($e->getMessage());
             return response()->json(['error' => 'Error al crear el usuario'], 500);
+
         }
 
     }
@@ -132,6 +137,7 @@ class AuthController extends Controller
         try {
 
             // validator
+            $userId = auth()->user()->id;
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
@@ -139,7 +145,7 @@ class AuthController extends Controller
                 'email' => 'required|string|email|max:255|unique:email',
             ]);
 
-            $user = User::find($id);
+            $user = User::find($userId);
 
             $user->name = $request->name;
             $user->lastname = $request->lastname;
